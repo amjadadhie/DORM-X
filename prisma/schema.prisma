@@ -9,3 +9,31 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum Roles {
+  PENGHUNI
+  ADMIN
+}
+
+// Definisi model User
+model User {
+  ID        Int      @id @default(autoincrement()) @unique
+  username  String   @unique
+  password  String
+  role      Roles
+  nama       String
+  nomorKamar String
+  tagihan    Float
+}
+
+// Definisi model OrderRequest
+model OrderRequest {
+  orderID           Int      @id @default(autoincrement()) @unique
+  timestamp         DateTime @default(now())
+  session           String
+  petugasKebersihan String?
+  nomorKamar        String?
+  status            String?
+  notes             String?
+
+}
