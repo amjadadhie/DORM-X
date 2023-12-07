@@ -21,7 +21,7 @@ export async function GET(req: any) {
 
     const penghuniByID = await prisma.user.findUnique({
         where: {
-            ID: req
+            userID: req
         },
     });
 
