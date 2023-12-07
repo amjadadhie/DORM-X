@@ -38,28 +38,3 @@ export async function POST(req: NextRequest) {
   return NextResponse.json({ message: "success" });
 }
 
-export async function GET() {
-  const session = await getServerSession(authOptions);
-
-  if (!session?.user) {
-    return NextResponse.json(
-      {
-        message: "Silahkan login terlebih dahulu",
-      },
-      { status: 401 }
-    );
-  }
-
-  if (session?.user.Role !== "ADMIN") {
-    return NextResponse.json(
-      {
-        message: "Anda tidak memiliki akses",
-      },
-      { status: 401 }
-    );
-  }
-
-  const orderRequest = await prisma.orderRequest.findMany({});
-
-  return NextResponse.json(orderRequest);
-}
