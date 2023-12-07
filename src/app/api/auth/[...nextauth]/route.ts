@@ -64,7 +64,7 @@ export const authOptions: NextAuthOptions = {
         // Get user's role
         const userData = await prisma.user.findUnique({
           where: {
-            ID: user.id as unknown as number,
+            userID: user.id as unknown as number,
           },
           select: {
             role: true,
@@ -82,10 +82,10 @@ export const authOptions: NextAuthOptions = {
       // Get user's data
       const userData = await prisma.user.findUnique({
         where: {
-          ID: token.uid as number,
+          userID: token.uid as number,
         },
         select: {
-          ID: true,
+          userID: true,
           username: true,
           password: true,
           nama: true,
