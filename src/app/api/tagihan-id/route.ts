@@ -19,11 +19,16 @@ export async function GET(req: any) {
     }
     // end of route protection
 
-    const penghuniByID = await prisma.user.findUnique({
+    const tagihanByID = await prisma.user.findUnique({
         where: {
             userID: req
         },
+        select:{
+            tagihan: true
+        }
     });
 
-    return NextResponse.json({penghuniByID});
+    return NextResponse.json({tagihanByID});
 }
+
+
