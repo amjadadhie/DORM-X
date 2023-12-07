@@ -38,14 +38,15 @@ const LoginPage: React.FC<SignUpContainerProps> = ({ $signinIn }) => {
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [registerUsername, setRegisterUsername] = useState("");
-  const [registerEmail, setRegisterEmail] = useState("");
+  const [registerNama, setRegisterNama] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [issignIn, toggle] = React.useState(true);
+  const [dataUser, setDataUser] = useState<any[]>([]);
   //use useNavigation
   // const navigate = useNavigate();
 
   const router = useRouter();
-  const handleLogin = async (e:React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     try {
       e.preventDefault();
       console.log("kepencet gak sih");
@@ -138,7 +139,26 @@ const LoginPage: React.FC<SignUpContainerProps> = ({ $signinIn }) => {
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+    try {
+      const res = await fetch("/api/register", {
+        method: "POST",
+        body: JSON.stringify({
+          username: registerUsername,
+          password: registerPassword,
+          nama: registerNama,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (res.status === 200) {
+        toast.success("Successfully Register!");
+      } else {
+        toast.error("Failed to Register");
+      }
+    } catch (error) {
+      console.log(error);
+    }
     // try {
     //   const response = await axios.post("http://localhost:3001/user/signup", {
     //     username: registerUsername,
@@ -174,13 +194,13 @@ const LoginPage: React.FC<SignUpContainerProps> = ({ $signinIn }) => {
             type="text"
             value={registerUsername}
             onChange={(e) => setRegisterUsername(e.target.value)}
-            placeholder="Name"
+            placeholder="Username"
           />
           <Components.Input
-            type="email"
-            value={registerEmail}
-            onChange={(e) => setRegisterEmail(e.target.value)}
-            placeholder="Email"
+            type="nama"
+            value={registerNama}
+            onChange={(e) => setRegisterNama(e.target.value)}
+            placeholder="Nama"
           />
           <Components.Input
             type="password"
@@ -188,8 +208,9 @@ const LoginPage: React.FC<SignUpContainerProps> = ({ $signinIn }) => {
             onChange={(e) => setRegisterPassword(e.target.value)}
             placeholder="Password"
           />
-          {/* <Components.Button onClick={handleRegister}> */}
-          <Components.Button>Register</Components.Button>
+          <Components.Button onClick={handleRegister}>
+            Register
+          </Components.Button>
         </Components.Form>
       </Components.SignUpContainer>
 

@@ -21,7 +21,8 @@ export async function GET(req: any) {
 
     const tagihanByID = await prisma.user.findUnique({
         where: {
-            userID: req
+            userID: req,
+            role: "PENGHUNI"
         },
         select:{
             tagihan: true

@@ -19,12 +19,17 @@ export async function GET(req: any) {
     }
     // end of route protection
 
-    const penghuniByID = await prisma.user.findUnique({
+    const kamarByID = await prisma.user.findUnique({
         where: {
             userID: req,
             role: "PENGHUNI"
         },
+        select:{
+            nomorKamar: true
+        }
     });
 
-    return NextResponse.json({penghuniByID});
+    return NextResponse.json({kamarByID});
 }
+
+
