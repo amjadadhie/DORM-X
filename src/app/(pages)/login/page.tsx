@@ -3,40 +3,77 @@
 "use client";
 
 import React from "react";
-import * as Components from "../../components/login/SignInComponents";
+import * as Components from "../../../components/login/SignInComponents";
 import { useState } from "react";
-import axios from "axios";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
+import { Formik, Field, Form, FormikHelpers } from "formik";
+
 // import CustomToast from "./CustomToaster";
 // import Cookies from "universal-cookie";
 // import Cookies from "js-cookies";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 //import jwt decode here
 // import { jwtDecode } from "jwt-decode";
 // import Cookies from "universal-cookie";
+
 
 interface SignUpContainerProps {
   $signinIn: boolean;
 }
 
-interface AxiosError {
-  response?: {
-    data?: {
-      message?: string;
-    };
-  };
+interface Values {
+  username: string;
+  password: string;
 }
 
+// interface AxiosError {
+//   response?: {
+//     data?: {
+//       message?: string;
+//     };
+//   };
+// }
+
 const LoginPage: React.FC<SignUpContainerProps> = ({ $signinIn }) => {
-  const [loginEmail, setLoginEmail] = useState("");
+  const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [registerUsername, setRegisterUsername] = useState("");
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
-  const [signIn, toggle] = React.useState(true);
+  const [issignIn, toggle] = React.useState(true);
   //use useNavigation
   // const navigate = useNavigate();
 
+  const router = useRouter();
   const handleLogin = async (e: React.FormEvent) => {
+    try {
+      // Assuming you get the values from a form or some other source
+      const val: Values = {
+      username: "username", // Replace with the actual username
+      password: "password", // Replace with the actual password
+    };
+
+      // Perform login authentication logic here
+      const res = await signIn("credentials", {
+        redirect: false,
+        username: val.username,
+        password: val.password,
+        callbackUrl: "/",
+      });
+
+      // print error if error
+      if (res?.error) {
+        toast.error("Invalid credentials");
+      } else {
+        toast.success("Login success");
+        console.log(res);
+        router.refresh();
+      }
+    } catch (error) {
+      console.log(error);
+    }
     // console.log("Masukan login");
     // e.preventDefault();
     // try {
@@ -126,7 +163,7 @@ const LoginPage: React.FC<SignUpContainerProps> = ({ $signinIn }) => {
 
   return (
     <Components.Container>
-      <Components.SignUpContainer $signinIn={signIn}>
+      <Components.SignUpContainer $signinIn={issignIn}>
         {/* <img
           src="/assets/logo washwiz.svg"
           alt="logo"
@@ -158,19 +195,20 @@ const LoginPage: React.FC<SignUpContainerProps> = ({ $signinIn }) => {
         </Components.Form>
       </Components.SignUpContainer>
 
-      <Components.SignInContainer $signinIn={signIn}>
+      <Components.SignInContainer $signinIn={issignIn}>
         <Components.Form>
           {/* <img
             src="/assets/logo washwiz.svg"
             alt="logo"
             className="absolute top-0 left-0 w-64 h-auto m-8"
           /> */}
+
           <Components.Title>Sign in</Components.Title>
           <Components.Input
-            type="email"
-            value={loginEmail}
-            onChange={(e) => setLoginEmail(e.target.value)}
-            placeholder="Email"
+            type="username"
+            value={loginUsername}
+            onChange={(e) => setLoginUsername(e.target.value)}
+            placeholder="username"
           />
           <Components.Input
             type="password"
@@ -178,13 +216,13 @@ const LoginPage: React.FC<SignUpContainerProps> = ({ $signinIn }) => {
             onChange={(e) => setLoginPassword(e.target.value)}
             placeholder="Password"
           />
-          <Components.Button onClick={handleLogin}>Login</Components.Button>
+          <Components.Button type="submit" onClick={handleLogin}>Login</Components.Button>
         </Components.Form>
       </Components.SignInContainer>
 
-      <Components.OverlayContainer $signinIn={signIn}>
-        <Components.Overlay $signinIn={signIn}>
-          <Components.LeftOverlayPanel $signinIn={signIn}>
+      <Components.OverlayContainer $signinIn={issignIn}>
+        <Components.Overlay $signinIn={issignIn}>
+          <Components.LeftOverlayPanel $signinIn={issignIn}>
             <Components.Title>Wohoo!</Components.Title>
             <Components.SemiTitle>
               lets clean up you clothes
@@ -198,7 +236,7 @@ const LoginPage: React.FC<SignUpContainerProps> = ({ $signinIn }) => {
             </Components.GhostButton>
           </Components.LeftOverlayPanel>
 
-          <Components.RightOverlayPanel $signinIn={signIn}>
+          <Components.RightOverlayPanel $signinIn={issignIn}>
             <Components.Title>One step closer</Components.Title>
             <Components.SemiTitle>
               to get your clothes done!

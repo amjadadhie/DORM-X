@@ -95,6 +95,7 @@ export const Button = styled.button`
     outline: none;
   }
 `;
+
 export const GhostButton = styled(Button)`
   background-color: transparent;
   border-color: #ffffff;
