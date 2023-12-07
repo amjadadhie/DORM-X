@@ -58,13 +58,13 @@ export const authOptions: NextAuthOptions = {
   secret: "secret", //process.env.NEXTAUTH_SECRET
   callbacks: {
     jwt: async ({ token, user }) => {
-      if (user && user.id) {
-        token.uid = user.id as unknown as number; // Assign user's id to token
+      if (user && user.userID) {
+        token.uid = user.userID as unknown as number; // Assign user's id to token
 
         // Get user's role
         const userData = await prisma.user.findUnique({
           where: {
-            userID: user.id as unknown as number,
+            userID: user.userID as unknown as number,
           },
           select: {
             role: true,

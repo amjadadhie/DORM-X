@@ -8,7 +8,6 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
-import { Formik, Field, Form, FormikHelpers } from "formik";
 
 // import CustomToast from "./CustomToaster";
 // import Cookies from "universal-cookie";
@@ -17,7 +16,6 @@ import { Formik, Field, Form, FormikHelpers } from "formik";
 //import jwt decode here
 // import { jwtDecode } from "jwt-decode";
 // import Cookies from "universal-cookie";
-
 
 interface SignUpContainerProps {
   $signinIn: boolean;
@@ -47,29 +45,27 @@ const LoginPage: React.FC<SignUpContainerProps> = ({ $signinIn }) => {
   // const navigate = useNavigate();
 
   const router = useRouter();
-  const handleLogin = async (val: any) => {
+  const handleLogin = async (e:React.FormEvent) => {
     try {
-      // Assuming you get the values from a form or some other source
-      const val: Values = {
-      username: "username", // Replace with the actual username
-      password: "password", // Replace with the actual password
-    };
-
+      e.preventDefault();
+      console.log("kepencet gak sih");
       // Perform login authentication logic here
       const res = await signIn("credentials", {
         redirect: false,
-        username: val.username,
-        password: val.password,
+        username: loginUsername,
+        password: loginPassword,
         callbackUrl: "/",
       });
       console.log(res);
       console.log("Masuk sini");
       // print error if error
       if (res?.error) {
+        console.log("error");
         toast.error("Invalid credentials");
       } else {
         toast.success("Login success");
         console.log(res);
+        router.push("/");
         router.refresh();
       }
     } catch (error) {
@@ -140,27 +136,28 @@ const LoginPage: React.FC<SignUpContainerProps> = ({ $signinIn }) => {
     // }
   };
 
-  // const handleRegister = async (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   try {
-  //     const response = await axios.post("http://localhost:3001/user/signup", {
-  //       username: registerUsername,
-  //       email: registerEmail,
-  //       password: registerPassword,
-  //     });
-  //     console.log(response);
-  //     CustomToast({ message: "Registration successful!", type: "success" });
-  //     // Handle response, possibly auto-login user, etc.
-  //   } catch (error) {
-  //     const typedError = error as AxiosError;
-  //     const errorMessage =
-  //       typedError.response?.data?.message || "Registration failed!";
-  //     // Log the error if needed
-  //     console.error("Registration error", errorMessage);
-  //     // Show error toast
-  //     CustomToast({ message: errorMessage, type: "error" });
-  //   }
-  // };
+  const handleRegister = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // try {
+    //   const response = await axios.post("http://localhost:3001/user/signup", {
+    //     username: registerUsername,
+    //     email: registerEmail,
+    //     password: registerPassword,
+    //   });
+    //   console.log(response);
+    //   CustomToast({ message: "Registration successful!", type: "success" });
+    //   // Handle response, possibly auto-login user, etc.
+    // } catch (error) {
+    //   const typedError = error as AxiosError;
+    //   const errorMessage =
+    //     typedError.response?.data?.message || "Registration failed!";
+    //   // Log the error if needed
+    //   console.error("Registration error", errorMessage);
+    //   // Show error toast
+    //   CustomToast({ message: errorMessage, type: "error" });
+    // }
+  };
 
   return (
     <Components.Container>
@@ -217,7 +214,9 @@ const LoginPage: React.FC<SignUpContainerProps> = ({ $signinIn }) => {
             onChange={(e) => setLoginPassword(e.target.value)}
             placeholder="Password"
           />
-          <Components.Button type="submit" onClick={handleLogin}>Login</Components.Button>
+          <Components.Button type="submit" onClick={handleLogin}>
+            Login
+          </Components.Button>
         </Components.Form>
       </Components.SignInContainer>
 
