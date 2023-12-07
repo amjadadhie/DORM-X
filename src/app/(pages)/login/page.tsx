@@ -47,7 +47,7 @@ const LoginPage: React.FC<SignUpContainerProps> = ({ $signinIn }) => {
   // const navigate = useNavigate();
 
   const router = useRouter();
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = async (val: any) => {
     try {
       // Assuming you get the values from a form or some other source
       const val: Values = {
@@ -62,7 +62,8 @@ const LoginPage: React.FC<SignUpContainerProps> = ({ $signinIn }) => {
         password: val.password,
         callbackUrl: "/",
       });
-
+      console.log(res);
+      console.log("Masuk sini");
       // print error if error
       if (res?.error) {
         toast.error("Invalid credentials");
