@@ -4,8 +4,8 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 
 
-//mendapatkan data penghuni berdasarkan id
-export async function get(req: any) {
+//mendapatkan data penghuni berdasarkan idx
+export async function GET(req: any) {
     const session = await getServerSession(authOptions);
 
     // route protection
