@@ -17,7 +17,7 @@ const CleaningRequest = () => {
         <div className="grid grid-cols-5 gap-4 p-4 bg-white rounded-lg shadow-md">
           <div className="col-span-3 space-y-4">
             {/* Room Number Input */}
-            <div className="flex flex-col h-[20%] ">
+            <div className="flex flex-col h-[20%] gap-y-2">
               <div className="flex items-center gap-x-2 ">
                 <MdMeetingRoom className="text-[#4D82B6]" size={18} />
                 <span className="p-2  w-full border-b border-[#11406A]">
