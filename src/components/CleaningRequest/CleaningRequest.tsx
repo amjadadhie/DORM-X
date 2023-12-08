@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import { MdMeetingRoom } from "react-icons/md";
 import { FaRegClock } from "react-icons/fa";
 import { CgNotes } from "react-icons/cg";
@@ -6,15 +6,14 @@ import Image from "next/image"; // If you're using Next.js Image component
 import React, { useEffect, useState } from "react";
 import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { getServerSession } from "next-auth";
+import {getServerSession}  from "next-auth";
 import { Session } from "inspector";
+import prisma from "@/app/libs/prismadb"
 
-export default async function CleaningRequest() {
+export default async function CleaningRequest(id : any) {
   const [sessionSelected, setSessionSelected] = useState("")
   const [catatan, setCatatan] = useState("")
   const [available, setAvailable] = useState(Boolean)
-
-  const session = await getServerSession(authOptions);
 
   const handleSubmit = async () => {
     if (available) {
@@ -75,7 +74,7 @@ export default async function CleaningRequest() {
               <div className="flex items-center gap-x-2 ">
                 <MdMeetingRoom className="text-[#4D82B6]" size={18} />
                 <span className="p-2  w-full border-b border-[#11406A]">
-                  Room No. {session?.user.nomorKamar}
+                  Room No. 20
                 </span>
               </div>
 

@@ -1,10 +1,12 @@
-"use client";
 import React from "react";
 import NavigationBarAdmin from "../../../components/NavigationBarAdmin/NavigationBarAdmin";
 import Footer from "../../../components/Footer/Footer";
 import TableAdmin from "@/components/TableAdmin/tableAdmin";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
-const page = () => {
+async function page() {
+  const session = await getServerSession(authOptions);
   return (
     <div>
       <NavigationBarAdmin />

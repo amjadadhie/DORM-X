@@ -1,4 +1,4 @@
-"use client";
+
 import React from "react";
 import NavigationBar from "../../../components/NavigationBar/NavigationBar";
 import Hero from "../../../components/Hero/Hero";
@@ -7,8 +7,15 @@ import CleaningRequest from "../../../components/CleaningRequest/CleaningRequest
 import UserProfile from "../../../components/UserProfile/UserProfile";
 import OtherDesign from "../../../components/OtherDesign/OtherDesign";
 import Footer from "../../../components/Footer/Footer"
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { UserSession } from "@/components/userFetcher";
 
-const page = () => {
+async function page() {
+  const session = await getServerSession(authOptions);
+  const user = session?.user as UserSession;
+  const id = user.ID
+
   return (
     <div>
       <NavigationBar />
@@ -19,7 +26,7 @@ const page = () => {
         </div>
         <div className="w-[1%] bg-white rounded-xl my-8"></div>
         <div className="w-[49%]">
-          <CleaningRequest />
+          <CleaningRequest id/>
         </div>
       </div>
       <div className="flex flex-row">

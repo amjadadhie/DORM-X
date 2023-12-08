@@ -1,14 +1,16 @@
+"use client"
 import React, { useState, useEffect } from "react";
 // Define the type for your order data
-// type Order = {
-//   timestamp: string;
-//   session: number;
-//   petugasKebersihan: string;
-//   nomorKamar: number;
-//   status: boolean; // assuming 'false' corresponds to 'requested' and 'true' to 'inProgress'
-//   notes: string;
-//   id: string;
-// };
+
+type Order = {
+  timestamp: string;
+  session: number;
+  petugasKebersihan: string;
+  nomorKamar: number;
+  status: boolean; // assuming 'false' corresponds to 'requested' and 'true' to 'inProgress'
+  notes: string;
+  id: string;
+};
 
 // Define a function component
 const CurrentOrder: React.FC = () => {
@@ -50,9 +52,10 @@ const CurrentOrder: React.FC = () => {
         Current Order
       </div>
       <div className="bg-white rounded-lg shadow p-6 m-4">
-        {orders.map((order, index) => (
+        {/* {orders.map((order, index) => {
+          return (
           <div
-            key={order.orderID}
+            key={order.id}
             className={`flex items-center border-b-2 border-black ${
               index < orders.length - 1 ? "mb-4" : ""
             }`}
@@ -80,7 +83,7 @@ const CurrentOrder: React.FC = () => {
                 order.status.toString().slice(1)}
             </div>
           </div>
-        ))}
+        )})} */}
       </div>
     </div>
   );
