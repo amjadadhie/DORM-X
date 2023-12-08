@@ -9,11 +9,12 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import {getServerSession}  from "next-auth";
 import { Session } from "inspector";
 import prisma from "@/app/libs/prismadb"
+import { Modern_Antiqua } from "next/font/google";
 
 export default async function CleaningRequest(id : any) {
   const [sessionSelected, setSessionSelected] = useState("")
   const [catatan, setCatatan] = useState("")
-  const [available, setAvailable] = useState(Boolean)
+  const [available, setAvailable] = useState(true)
 
   const handleSubmit = async () => {
     if (available) {
@@ -23,7 +24,7 @@ export default async function CleaningRequest(id : any) {
           {
             method: "POST",
             body: JSON.stringify({
-              SessionID : sessionSelected,
+              session : sessionSelected,
               notes: catatan,
             }),
             headers: {
@@ -58,7 +59,7 @@ export default async function CleaningRequest(id : any) {
     };
     fetchAvailOrder();
   })
-  
+
   return (
     <div>
       <div className="flex flex-col p-4 ">
@@ -84,10 +85,12 @@ export default async function CleaningRequest(id : any) {
                 <select
                   id="sessionSelect"
                   name="sessionSelect"
+                  value={sessionSelected}
+                  onChange={(e) => setSessionSelected(e.target.value)}
                   className="ml-2 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
                 >
-                  <option>Morning</option>
-                  <option>Afternoon</option>
+                  <option value={"morning"}>Morning</option>
+                  <option value={"afternoon"}>Afternoon</option>
                 </select>
               </div>
             </div>
@@ -120,6 +123,7 @@ export default async function CleaningRequest(id : any) {
             {/* Order Button */}
             <button
               type="button"
+              onClick={handleSubmit}
               className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-xl text-center font-bold rounded-lg shadow-sm text-white bg-[#11406A] w-full hover:shadow-[0_4px_4px_0px_rgba(0,0,0,0.25)]"
             >
               Order
