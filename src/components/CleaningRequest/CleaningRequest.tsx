@@ -87,8 +87,8 @@ export default async function CleaningRequest() {
                   name="sessionSelect"
                   className="ml-2 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
                 >
-                  <option>Select Session</option>
-                  {/* ... other options */}
+                  <option>Morning</option>
+                  <option>Afternoon</option>
                 </select>
               </div>
             </div>
@@ -121,7 +121,7 @@ export default async function CleaningRequest() {
             {/* Order Button */}
             <button
               type="button"
-              className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-xl text-center font-bold rounded-lg shadow-sm text-white bg-[#11406A] w-full"
+              className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-xl text-center font-bold rounded-lg shadow-sm text-white bg-[#11406A] w-full hover:shadow-[0_4px_4px_0px_rgba(0,0,0,0.25)]"
             >
               Order
             </button>

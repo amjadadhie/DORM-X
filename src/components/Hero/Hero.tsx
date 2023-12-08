@@ -9,7 +9,7 @@ export default async function Hero() {
 
   return (
     <div
-      className="w-full flex flex-col justify-start items-start p-5 text-left mt-16"
+      className="w-full flex flex-col justify-start items-start px-5 py-12 text-left mt-16"
       style={{
         backgroundImage: "url('/assets/hero.svg')",
         backgroundSize: "cover",

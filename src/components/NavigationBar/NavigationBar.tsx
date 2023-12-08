@@ -48,19 +48,14 @@ const nav = () => {
               <li>
                 <a
                   href="#"
-                  className="block py-2 px-3 text-white "
+                  className="block py-2 px-3 text-white hover:text-blue-950 md:px-5"
                   aria-current="page"
                 >
                   Order
                 </a>
               </li>
               <li>
-                <a href="#" className="block py-2 px-3 text-white ">
-                  Profile
-                </a>
-              </li>
-              <li>
-                <button className="block py-2 px-3 bg-[#FC97A3] rounded-lg shadow-lg">
+                <button className="block py-2 px-3 bg-[#FC97A3] rounded-lg hover:shadow-[0_4px_4px_0px_rgba(0,0,0,0.25)]">
                   Logout
                 </button>
               </li>
