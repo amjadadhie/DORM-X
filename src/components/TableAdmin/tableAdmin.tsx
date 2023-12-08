@@ -4,39 +4,28 @@ import React, { useState, useEffect, useMemo } from "react";
 import { PiArrowSquareOut } from "react-icons/pi";
 
 function TableAdmin({ header }: { header: any[] }) {
-  const [dataItem, setDataItem] = useState<any[]>([]);
-  const [search, setSearch] = useState<string>("");
-  const [showDeliveredOnly, setShowDeliveredOnly] = useState(false); // State for checkbox
+  const [status, setStatus] = useState("");
+  const [petugas, setPetugas] = useState("");
+  const [orderID, setOrderID] = useState();
 
-  useEffect(() => {
-    const fetchAssigned = async () => {
-      try {
-        const res = await fetch("/api/package-assigned");
-        const res2 = await res.json();
-        setDataItem(res2);
-      } catch (error: any) {
-        console.error("Error fetching data:", error.message);
-      }
-    };
-    fetchAssigned();
-  }, []);
-
-  // Filter data based on status and checkbox state
-  const filteredData = useMemo(() => {
-    if (showDeliveredOnly) {
-      return dataItem.filter(
-        (packageInfo) => packageInfo.statusPengiriman === "Delivered"
-      );
-    } else if (search && search != "") {
-      return dataItem.filter((item: any) =>
-        Object.values(item).some((value: any) =>
-          String(value).toLowerCase().includes(search.toLowerCase())
-        )
-      );
-    } else {
-      return dataItem;
+  const handleSubmit = async() => {
+    try{
+      const res = await fetch("/api/change-status",
+      {
+        method: "PATCH",
+        body: JSON.stringify({
+          orderID: orderID,
+          newStatus : status,
+          newPetugas : petugas,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
     }
-  }, [dataItem, showDeliveredOnly, search]);
+    catch (error) {
+      console.error("Error fetching orders:", error);}
+  }
 
   return (
     <div className="w-[1368px] mt-[23.54px] lg:mt-[30px] overflow-x-hidden">
@@ -77,14 +66,14 @@ function TableAdmin({ header }: { header: any[] }) {
               <div>20</div>
             </td>
             <td className="overflow-hidden w-auto h-auto py-[36px] text-[10px] lg:text-[16px] xl:text-[20px] text-center">
-              <select className="rounded-lg text-[#4D82B6] border-[#4D82B6]">
+              <select placeholder="status" className="rounded-lg text-[#4D82B6] border-[#4D82B6]">
                 <option value="1">Done</option>
                 <option value="2">In Progress</option>
                 <option value="3">Requested</option>
               </select>
             </td>
             <td className="flex justify-center w-auto h-auto lg:py-[36px] py-[42px] align-middle items-center">
-              <select className="rounded-lg text-[#4D82B6] border-[#4D82B6]">
+              <select placeholder="petugas" className="rounded-lg text-[#4D82B6] border-[#4D82B6]">
                 <option value="1">Amjad</option>
                 <option value="2">Auva</option>
                 <option value="3">Marvel</option>

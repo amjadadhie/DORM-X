@@ -19,17 +19,36 @@ export async function PATCH(req: any){
 
     const id = session?.user?.id;
 
-    const { orderID, newStatus } = await req.json();
+    const { orderID, newStatus, newPetugas } = await req.json();
 
-    
-    const updatedOrder = await prisma.orderRequest.update({
+    const updatedOrder = await prisma.orderRequest.findUnique({
         where: {
             orderID,
         },
-        data:{
-            status: newStatus,
-        }
     })
+    
+    if (newStatus != null && newStatus != "" && newStatus != undefined){
+    
+        const updatedOrder = await prisma.orderRequest.update({
+            where: {
+                orderID,
+            },
+            data:{
+                status: newStatus,
+            }
+        })
+    }
+
+    if (newPetugas != null && newPetugas != "" && newPetugas != undefined){
+        const updatedOrder = await prisma.orderRequest.update({
+            where: {
+                orderID,
+            },
+            data: {
+                petugasKebersihan: newPetugas,
+            }
+        })
+    }
 
     // error order not found
     if (!updatedOrder) {
