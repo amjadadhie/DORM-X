@@ -54,7 +54,7 @@ const nav = () => {
                   Order
                 </a>
               </li>
-              
+
               <li>
                 <button className="block py-2 px-3 bg-[#FC97A3] rounded-lg shadow-lg">
                   Logout

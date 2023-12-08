@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 
 // Define the type for your order data
 type Order = {
@@ -16,20 +15,20 @@ type Order = {
 const CurrentOrder: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([]);
 
-  useEffect(() => {
-    const fetchOrders = async () => {
-      try {
-        const response = await axios.get(
-          "https://65566f2c84b36e3a431fbfef.mockapi.io/table/order-history"
-        );
-        setOrders(response.data);
-      } catch (error) {
-        console.error("Error fetching orders:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchOrders = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         "https://65566f2c84b36e3a431fbfef.mockapi.io/table/order-history"
+  //       );
+  //       setOrders(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching orders:", error);
+  //     }
+  //   };
 
-    fetchOrders();
-  }, []);
+  //   fetchOrders();
+  // }, []);
 
   // Function to determine the background color based on the order status  // Function to determine the background color based on the order status
   const statusBgColor = (status: string): string => {
