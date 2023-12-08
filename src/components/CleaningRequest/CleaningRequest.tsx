@@ -14,7 +14,7 @@ export default async function CleaningRequest() {
   const [catatan, setCatatan] = useState("")
   const [available, setAvailable] = useState(Boolean)
 
-  const sesi = await getServerSession(authOptions);
+  const session = await getServerSession(authOptions);
 
   const handleSubmit = async () => {
     if (available) {
@@ -75,7 +75,7 @@ export default async function CleaningRequest() {
               <div className="flex items-center gap-x-2 ">
                 <MdMeetingRoom className="text-[#4D82B6]" size={18} />
                 <span className="p-2  w-full border-b border-[#11406A]">
-                  Room No. {sesi?.user.nomorKamar}
+                  Room No. {session?.user.nomorKamar}
                 </span>
               </div>
 

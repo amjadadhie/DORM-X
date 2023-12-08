@@ -5,9 +5,12 @@ import Image from "next/image";
 import { GetServerSideProps } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import prisma from "@/app/libs/prismadb";
+import { UserSession } from "../userFetcher";
 
-const Profile: React.FC = () => {
+export default async function Profile() {
+  const session = await getServerSession(authOptions);
+  const user = session?.user as UserSession;
+  
   return (
     <div className="flex items-center p-4 bg-white  shadow-md">
       <div className="flex-shrink-0">
@@ -22,14 +25,14 @@ const Profile: React.FC = () => {
       <div className="ml-4">
         <div className="flex flex-col gap-y-2 px-8">
           <div className="text-5xl font-bold  text-[#11406A]">Profile</div>
-          <div className="text-[#11406A] text-2xl">Name: Lisa</div>
-          <div className="text-[#11406A] text-2xl">Room Number: 20</div>
+          <div className="text-[#11406A] text-2xl">Name: {user.nama}</div>
+          <div className="text-[#11406A] text-2xl">Room Number: {user.nomorKamar}</div>
           <div className="text-[#11406A] text-2xl">
-            This Month’s Total Bill:
+            This Month’s Total Bill: 
           </div>
           <div className="flex items-center text-[#11406A] mt-1 text-2xl">
             <FaMoneyBillWave className="text-green-500" />
-            <span className="ml-2">IDR 50.000</span>
+            <span className="ml-2">{user.tagihan.toString()}</span>
           </div>
         </div>
       </div>
@@ -37,5 +40,4 @@ const Profile: React.FC = () => {
   );
 };
 
-export default Profile;
 
