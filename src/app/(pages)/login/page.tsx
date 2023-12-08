@@ -48,7 +48,7 @@ const LoginPage: React.FC<SignUpContainerProps> = ({ $signinIn }) => {
       } else {
         toast.success("Login success");
         console.log(res);
-        router.push("/");
+        router.push("/user-dashboard");
         router.refresh();
       }
     } catch (error) {
