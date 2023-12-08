@@ -19,15 +19,16 @@ export async function GET(req: any) {
     }
     // end of route protection
 
-    const penghuniByID = await prisma.user.findUnique({
+    const orders = await prisma.orderRequest.findMany({
         where: {
-            userID: req,
-            role: "PENGHUNI"
-        },
-        select:{
-            nomorKamar: true
+            session: req
         }
     });
 
-    return NextResponse.json({penghuniByID});
+    const orderCount = orders.length;
+
+    // Memberikan nilai true jika jumlah pesanan kurang dari 3
+    const isLessThanThree = orderCount < 3;
+
+    return NextResponse.json({ isLessThanThree });
 }
