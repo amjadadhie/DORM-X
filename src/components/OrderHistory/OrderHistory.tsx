@@ -47,7 +47,9 @@ const CurrentOrder: React.FC = () => {
 
   return (
     <div className=" ">
-      <div className="font-bold text-xl text-white mt-8 ml-4">Current Order</div>
+      <div className="font-bold text-xl text-white mt-8 ml-4">
+        Current Order
+      </div>
       <div className="bg-white rounded-lg shadow p-6 m-4">
         {orders.map((order, index) => (
           <div
