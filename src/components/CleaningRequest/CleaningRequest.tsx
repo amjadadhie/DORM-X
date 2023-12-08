@@ -3,18 +3,21 @@ import { MdMeetingRoom } from "react-icons/md";
 import { FaRegClock } from "react-icons/fa";
 import { CgNotes } from "react-icons/cg";
 import Image from "next/image"; // If you're using Next.js Image component
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import {getServerSession}  from "next-auth";
 import { Session } from "inspector";
 import prisma from "@/app/libs/prismadb"
 import { Modern_Antiqua } from "next/font/google";
+import { getSession } from "next-auth/react";
+import toast from "react-hot-toast";
 
 export default async function CleaningRequest(id : any) {
   const [sessionSelected, setSessionSelected] = useState("")
   const [catatan, setCatatan] = useState("")
   const [available, setAvailable] = useState(true)
+  const [userRoomNumber, setUserRoomNumber] = useState("");
 
   const handleSubmit = async () => {
     if (available) {
@@ -30,7 +33,12 @@ export default async function CleaningRequest(id : any) {
             headers: {
               "Content-Type": "application/json",
             },
-          });      
+          });
+          if (response.status === 200) {
+            toast.success("Successfully order cleaning service!");
+          } else {
+            toast.error("Failed to order");
+          }      
       }
       catch (error) {
         console.error("Error fetching orders:", error);
@@ -59,6 +67,20 @@ export default async function CleaningRequest(id : any) {
     };
     fetchAvailOrder();
   })
+  // useEffect(() => {
+  //   const fetchRoomNumber = async () => {
+  //     const session = await getSession(); // Mendapatkan informasi sesi pengguna
+
+  //     if (session && session.user && session.user.nomorKamar) {
+  //       setUserRoomNumber(session.user.nomorKamar);
+  //       // Lakukan sesuatu dengan nomor kamar dari pengguna yang sedang login
+  //       console.log('Nomor kamar pengguna:', userRoomNumber);
+  //     }
+  //   };
+
+  //   fetchRoomNumber();
+  // }, []);
+
 
   return (
     <div>
@@ -75,7 +97,7 @@ export default async function CleaningRequest(id : any) {
               <div className="flex items-center gap-x-2 ">
                 <MdMeetingRoom className="text-[#4D82B6]" size={18} />
                 <span className="p-2  w-full border-b border-[#11406A]">
-                  Room No. 20
+                  Room No. 
                 </span>
               </div>
 
