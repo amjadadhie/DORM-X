@@ -13,6 +13,7 @@
     "@prisma/client": "^5.7.0",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
+    "flowbite": "^2.2.0",
     "formik": "^2.4.5",
     "next": "^14.0.4",
     "next-auth": "^4.24.5",
