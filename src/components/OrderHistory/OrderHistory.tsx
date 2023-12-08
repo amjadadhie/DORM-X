@@ -1,28 +1,27 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-
 // Define the type for your order data
-type Order = {
-  timestamp: string;
-  session: number;
-  petugasKebersihan: string;
-  nomorKamar: number;
-  status: boolean; // assuming 'false' corresponds to 'requested' and 'true' to 'inProgress'
-  notes: string;
-  id: string;
-};
+// type Order = {
+//   timestamp: string;
+//   session: number;
+//   petugasKebersihan: string;
+//   nomorKamar: number;
+//   status: boolean; // assuming 'false' corresponds to 'requested' and 'true' to 'inProgress'
+//   notes: string;
+//   id: string;
+// };
 
 // Define a function component
 const CurrentOrder: React.FC = () => {
-  const [orders, setOrders] = useState<Order[]>([]);
+  const [orders, setOrders] = useState<any[]>([]);
 
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get(
-          "https://65566f2c84b36e3a431fbfef.mockapi.io/table/order-history"
+        const response = await fetch(
+          "/api/all-order"
         );
-        setOrders(response.data);
+        const res2 = await response.json();
+        setOrders(res2);
       } catch (error) {
         console.error("Error fetching orders:", error);
       }
@@ -53,7 +52,7 @@ const CurrentOrder: React.FC = () => {
       <div className="bg-white rounded-lg shadow p-6 m-4">
         {orders.map((order, index) => (
           <div
-            key={order.id}
+            key={order.orderID}
             className={`flex items-center border-b-2 border-black ${
               index < orders.length - 1 ? "mb-4" : ""
             }`}
