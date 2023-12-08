@@ -6,9 +6,7 @@ import { getServerSession } from "next-auth";
 
 export async function POST(req: NextRequest) {
   const { username, password, nama } = await req.json();
-
-  const session = await getServerSession(authOptions);
-
+  
   const hashedPassword = await hash(password, 12);
 
   const userCount = await prisma.user.count();

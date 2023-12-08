@@ -17,10 +17,16 @@ export async function GET() {
     }
   
     const user = session?.user.userID;
-  
-    const userOrder = await prisma.user.findMany({
+
+    const kamar = await prisma.user.findUnique({
+      where: {
+        userID: user,
+      },
+      })
+
+    const userOrder = await prisma.orderRequest.findMany({
         where:{
-            userID: user
+           nomorKamar: kamar?.nomorKamar,
         }
     });
 
