@@ -1,26 +1,13 @@
 import prisma from "@/app/libs/prismadb";
 import { NextRequest, NextResponse } from "next/server";
-//import { hash } from "bcryptjs";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 
 export async function POST(req: NextRequest) {
-  const { nomorKamar, SessionId, notes } = await req.json();
+  const { SessionId, notes } = await req.json();
 
   const session = await getServerSession(authOptions);
-
-  // await prisma.user.create({
-  //     data: {
-  //         id,
-  //         username,
-  //         password: hashedPassword,
-  //         nama,
-  //         tanggalLahir,
-  //         noTelp,
-  //         alamat,
-  //         role: "STAFF",
-  //     },
-  //   });
+  const nomorKamar = session?.user?.nomorKamar
 
   const OrderRequestCount = await prisma.orderRequest.count();
 

@@ -1,11 +1,42 @@
 "use client";
-import React from "react";
 import { MdMeetingRoom } from "react-icons/md";
 import { FaRegClock } from "react-icons/fa";
 import { CgNotes } from "react-icons/cg";
 import Image from "next/image"; // If you're using Next.js Image component
+import React, { useEffect, useState } from "react";
+import { NextRequest, NextResponse } from "next/server";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { getServerSession } from "next-auth";
+import { Session } from "inspector";
 
-const CleaningRequest = () => {
+export default async function CleaningRequest() {
+  const [session, setSession] = useState("")
+  const [catatan, setCatatan] = useState("")
+
+  const sesi = await getServerSession(authOptions);
+
+  useEffect(() => {
+    const fetchCreateOrder = async () => {
+      try {
+        const response = await fetch(
+          "/api/order-request",
+          {
+            method: "POST",
+            body: JSON.stringify({
+              SessionID : session,
+              notes: catatan,
+            }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });      
+      }
+      catch (error) {
+        console.error("Error fetching orders:", error);
+    }
+    fetchCreateOrder();
+  }})
+  
   return (
     <div>
       <div className="flex flex-col p-4 ">
@@ -21,7 +52,7 @@ const CleaningRequest = () => {
               <div className="flex items-center gap-x-2 ">
                 <MdMeetingRoom className="text-[#4D82B6]" size={18} />
                 <span className="p-2  w-full border-b border-[#11406A]">
-                  Room No. 20
+                  Room No. {sesi?.user.nomorKamar}
                 </span>
               </div>
 
@@ -78,4 +109,3 @@ const CleaningRequest = () => {
   );
 };
 
-export default CleaningRequest;
