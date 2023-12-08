@@ -10,20 +10,21 @@ import { getServerSession } from "next-auth";
 import { Session } from "inspector";
 
 export default async function CleaningRequest() {
-  const [session, setSession] = useState("")
+  const [sessionSelected, setSessionSelected] = useState("")
   const [catatan, setCatatan] = useState("")
+  const [available, setAvailable] = useState(Boolean)
 
   const sesi = await getServerSession(authOptions);
 
-  useEffect(() => {
-    const fetchCreateOrder = async () => {
+  const handleSubmit = async () => {
+    if (available) {
       try {
         const response = await fetch(
           "/api/order-request",
           {
             method: "POST",
             body: JSON.stringify({
-              SessionID : session,
+              SessionID : sessionSelected,
               notes: catatan,
             }),
             headers: {
@@ -34,8 +35,30 @@ export default async function CleaningRequest() {
       catch (error) {
         console.error("Error fetching orders:", error);
     }
-    fetchCreateOrder();
-  }})
+    }
+  }
+
+  useEffect(() => {
+    const fetchAvailOrder = async() => {
+      try{
+        const res = await fetch("/api/order-avail",
+        {
+          method: "GET",
+          body: JSON.stringify({
+            session: sessionSelected
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const res2 = await res.json();
+        setAvailable(res2);
+      }
+      catch (error) {
+        console.error("Error fetching orders:", error);}
+    };
+    fetchAvailOrder();
+  })
   
   return (
     <div>
