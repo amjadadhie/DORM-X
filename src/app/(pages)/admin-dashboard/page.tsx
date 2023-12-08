@@ -8,7 +8,7 @@ const page = () => {
   return (
     <div>
       <NavigationBar />
-
+        
       <Footer />
     </div>
   );

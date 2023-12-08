@@ -9,14 +9,6 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 
-// import CustomToast from "./CustomToaster";
-// import Cookies from "universal-cookie";
-// import Cookies from "js-cookies";
-// import { useNavigate } from "react-router-dom";
-//import jwt decode here
-// import { jwtDecode } from "jwt-decode";
-// import Cookies from "universal-cookie";
-
 interface SignUpContainerProps {
   $signinIn: boolean;
 }
@@ -26,14 +18,6 @@ interface Values {
   password: string;
 }
 
-// interface AxiosError {
-//   response?: {
-//     data?: {
-//       message?: string;
-//     };
-//   };
-// }
-
 const LoginPage: React.FC<SignUpContainerProps> = ({ $signinIn }) => {
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
@@ -42,8 +26,6 @@ const LoginPage: React.FC<SignUpContainerProps> = ({ $signinIn }) => {
   const [registerPassword, setRegisterPassword] = useState("");
   const [issignIn, toggle] = React.useState(true);
   const [dataUser, setDataUser] = useState<any[]>([]);
-  //use useNavigation
-  // const navigate = useNavigate();
 
   const router = useRouter();
   const handleLogin = async (e: React.FormEvent) => {
@@ -66,75 +48,12 @@ const LoginPage: React.FC<SignUpContainerProps> = ({ $signinIn }) => {
       } else {
         toast.success("Login success");
         console.log(res);
-        router.push("/user-dashboard");
+        router.push("/");
         router.refresh();
       }
     } catch (error) {
       console.log(error);
     }
-    // console.log("Masukan login");
-    // e.preventDefault();
-    // try {
-    //   const response = await axios.post(
-    //     "http://localhost:3001/user/login",
-    //     {
-    //       email: loginEmail,
-    //       password: loginPassword,
-    //     },
-    //     {
-    //       headers: { "Content-Type": "application/json" },
-    //     }
-    //   );
-    //   const Cookies = (await import("universal-cookie")).default as any;
-    //   const cookies = new Cooimport LoginPage from './page';
-    // kies();
-    //   cookies.set("jwt", response.data.token, {
-    //     path: "/",
-    //     expires: new Date(Date.now() + 12096e5),
-    //   });
-    // localStorage.set('pengguna', JSON.stringify(response.data.pengguna));
-    // Cookies.set("jwt", response.data.token, {
-    //   expires: jwtDecode(response.data.token).exp,
-    // });
-    // console.log(response);
-    // RUBAH YANG DIBAWAH INI -------------------------------------------------------------------------------------------------------------
-    // Cookie.set("id_user", response.data.pengguna.email);
-    // const idUser = Cookie.get("id_user");
-    // console.log("id_user");
-    // if (!Cookie.get(idUser)) {
-    //   // Added closing parenthesis here
-    //   Cookie.set(idUser, []);
-    // }
-    //--------------------------------------------------------------------------------------------------------------------------------------
-    //   CustomToast({ message: "Login successful!", type: "success" });
-    //   console.log(response);
-    //   // localStorage.setItem("pengguna", JSON.stringify(response.data.pengguna));
-    //   //navigate to homepage
-    //   const token = cookies.get("jwt");
-    //   const userRole = await axios.get("http://localhost:3001/user/getRole", {
-    //     headers: {
-    //       cookies: token,
-    //       "Access-Control-Allow-Origin": "*",
-    //       "Content-Type": "application/json",
-    //     },
-    //   });
-    //   // const userRoleString = userRole.data.data.pengguna.role;
-    //   // console.log("Dapet Role nih");
-    //   // console.log(userRole.data);
-    //   if (userRole.data === "admin") {
-    //     // const Cookie = new Cookies();
-    //     console.log("Harusnya masuk admin");
-    //     navigate("/admin-dashboard");
-    //   } else {
-    //     console.log("Harusnya masuk user");
-    //     navigate("/user-dashboard");
-    //   }
-    // } catch (error) {
-    //   const typedError = error as AxiosError;
-    //   const errorMessage =
-    //     typedError.response?.data?.message || "Login failed!";
-    //   CustomToast({ message: errorMessage, type: "error" });
-    // }
   };
 
   const handleRegister = async (e: React.FormEvent) => {
@@ -159,24 +78,6 @@ const LoginPage: React.FC<SignUpContainerProps> = ({ $signinIn }) => {
     } catch (error) {
       console.log(error);
     }
-    // try {
-    //   const response = await axios.post("http://localhost:3001/user/signup", {
-    //     username: registerUsername,
-    //     email: registerEmail,
-    //     password: registerPassword,
-    //   });
-    //   console.log(response);
-    //   CustomToast({ message: "Registration successful!", type: "success" });
-    //   // Handle response, possibly auto-login user, etc.
-    // } catch (error) {
-    //   const typedError = error as AxiosError;
-    //   const errorMessage =
-    //     typedError.response?.data?.message || "Registration failed!";
-    //   // Log the error if needed
-    //   console.error("Registration error", errorMessage);
-    //   // Show error toast
-    //   CustomToast({ message: errorMessage, type: "error" });
-    // }
   };
 
   return (
