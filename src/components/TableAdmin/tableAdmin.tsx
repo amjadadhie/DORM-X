@@ -59,7 +59,7 @@ function TableAdmin({ header }: { header: any[] }) {
               return (
                 <th
                   key={idx}
-                  className="w-auto h-auto font-montserrat font-semibold text-white text-center py-[8px] text-[10px] lg:text-[16px] xl:text-[20px]"
+                  className="w-auto h-auto font-montserrat font-semibold text-black text-center py-[8px] text-[10px] lg:text-[16px] xl:text-[20px]"
                 >
                   {item}
                 </th>
