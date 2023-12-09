@@ -3,16 +3,11 @@
 import React, { useEffect, useState } from "react";
 import { FaMoneyBillWave } from "react-icons/fa";
 import Image from "next/image";
-import { GetServerSideProps } from "next";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { UserSession } from "../userFetcher";
 
 export default async function Profile(req: any) {
-  // const session = await getServerSession(authOptions);
-  // const user = session?.user as UserSession;
   const [dataPenghuni, setDataPenghuni] = useState([]);
   const id = req;
+
   useEffect(() => {
     const fetchDataPenghuni = async () => {
       try {
@@ -26,9 +21,11 @@ export default async function Profile(req: any) {
     };
     fetchDataPenghuni();
   }, []);
-  
+
+  console.log(dataPenghuni);
+
   return (
-    <div className="flex items-center p-4 bg-white  shadow-md">
+    <div className="flex items-center p-4 bg-white shadow-md">
       <div className="flex-shrink-0">
         <Image
           src="/assets/profile-icon.svg"
@@ -40,20 +37,28 @@ export default async function Profile(req: any) {
       </div>
       <div className="ml-4">
         <div className="flex flex-col gap-y-2 px-8">
-          <div className="text-5xl font-bold  text-[#11406A]">Profile</div>
-          <div className="text-[#11406A] text-2xl">Name: </div>
-          <div className="text-[#11406A] text-2xl">Room Number: 20</div>
-          <div className="text-[#11406A] text-2xl">
-            This Month’s Total Bill: 
-          </div>
-          <div className="flex items-center text-[#11406A] mt-1 text-2xl">
-            <FaMoneyBillWave className="text-green-500" />
-            <span className="ml-2">IDR 50.000</span>
-          </div>
+          <div className="text-5xl font-bold text-[#11406A]">Profile</div>
+
+          {/* Map over dataPenghuni */}
+          {dataPenghuni.map((penghuni: any) => (
+            <div key={penghuni.id}>
+              <div className="text-[#11406A] text-2xl">
+                Name: {penghuni.nama}
+              </div>
+              <div className="text-[#11406A] text-2xl">
+                Room Number: {penghuni.nomorKamar}
+              </div>
+              <div className="text-[#11406A] text-2xl">
+                This Month’s Total Bill:{" "}
+                <span className="flex items-center text-[#11406A] mt-1 text-2xl">
+                  <FaMoneyBillWave className="text-green-500" />
+                  <span className="ml-2">IDR {penghuni.tagihan}</span>
+                </span>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
   );
-};
-
-
+}

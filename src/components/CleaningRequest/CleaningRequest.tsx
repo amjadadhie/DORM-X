@@ -1,73 +1,70 @@
-"use client"
+"use client";
 import { MdMeetingRoom } from "react-icons/md";
 import { FaRegClock } from "react-icons/fa";
 import { CgNotes } from "react-icons/cg";
 import Image from "next/image"; // If you're using Next.js Image component
-import React, { use, useEffect, useState } from "react";
-import { NextRequest, NextResponse } from "next/server";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import {getServerSession}  from "next-auth";
-import { Session } from "inspector";
-import prisma from "@/app/libs/prismadb"
-import { Modern_Antiqua } from "next/font/google";
-import { getSession } from "next-auth/react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-export default async function CleaningRequest(id : any) {
-  const [sessionSelected, setSessionSelected] = useState("")
-  const [catatan, setCatatan] = useState("")
-  const [available, setAvailable] = useState(true)
+export default function CleaningRequest(id: Number) {
+  const [sessionSelected, setSessionSelected] = useState<string>("");
+  const [catatan, setCatatan] = useState("");
+  const [available, setAvailable] = useState<boolean>(true);
   const [userRoomNumber, setUserRoomNumber] = useState("");
-
-  const handleSubmit = async () => {
-    if (available) {
-      try {
-        const response = await fetch(
-          "/api/order-request",
-          {
-            method: "POST",
-            body: JSON.stringify({
-              session : sessionSelected,
-              notes: catatan,
-            }),
-            headers: {
-              "Content-Type": "application/json",
-            },
-          });
-          console.log(sessionSelected)
-          if (response.status === 200) {
-            toast.success("Successfully order cleaning service!");
-          } else {
-            toast.error("Failed to order");
-          }      
-      }
-      catch (error) {
-        console.error("Error fetching orders:", error);
-    }
-    }
-  }
+  console.log(id);
 
   useEffect(() => {
-    const fetchAvailOrder = async() => {
-      try{
-        const res = await fetch("/api/order-avail",
-        {
+    const fetchAvailOrder = async () => {
+      try {
+        const res = await fetch(`/api/order-avail?session=${sessionSelected}`, {
           method: "GET",
-          body: JSON.stringify({
-            session: sessionSelected
-          }),
           headers: {
             "Content-Type": "application/json",
           },
         });
         const res2 = await res.json();
         setAvailable(res2);
+      } catch (error) {
+        console.error("Error fetching orders:", error);
       }
-      catch (error) {
-        console.error("Error fetching orders:", error);}
     };
-    fetchAvailOrder();
-  })
+
+    if (sessionSelected) {
+      fetchAvailOrder();
+    }
+  }, [sessionSelected]);
+
+  console.log(sessionSelected);
+  console.log(available);
+
+  const handleSubmit = async () => {
+    console.log(sessionSelected);
+    console.log(available);
+    if (available) {
+      try {
+        const response = await fetch("/api/order-request", {
+          method: "POST",
+          body: JSON.stringify({
+            SessionId: sessionSelected,
+            notes: catatan,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        console.log(sessionSelected);
+        if (response.status === 200) {
+          toast.success("Successfully order cleaning service!");
+        } else {
+          toast.error("Failed to order");
+        }
+      } catch (error) {
+        console.error("Error fetching orders:", error);
+      }
+    } else {
+      toast.error("You already order cleaning service!");
+    }
+  };
   // useEffect(() => {
   //   const fetchRoomNumber = async () => {
   //     const session = await getSession(); // Mendapatkan informasi sesi pengguna
@@ -81,7 +78,6 @@ export default async function CleaningRequest(id : any) {
 
   //   fetchRoomNumber();
   // }, []);
-
 
   return (
     <div>
@@ -98,7 +94,7 @@ export default async function CleaningRequest(id : any) {
               <div className="flex items-center gap-x-2 ">
                 <MdMeetingRoom className="text-[#4D82B6]" size={18} />
                 <span className="p-2  w-full border-b border-[#11406A]">
-                  Room No. 
+                  Room No.
                 </span>
               </div>
 
@@ -127,6 +123,7 @@ export default async function CleaningRequest(id : any) {
                 rows={8}
                 className="ml-2 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 placeholder="Leave a note..."
+                onChange={(e) => setCatatan(e.target.value)}
               />
             </div>
           </div>
@@ -156,5 +153,4 @@ export default async function CleaningRequest(id : any) {
       </div>
     </div>
   );
-};
-
+}
