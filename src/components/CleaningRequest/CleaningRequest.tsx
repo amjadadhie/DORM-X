@@ -58,7 +58,6 @@ export default function CleaningRequest({ id }: UserProfileProps) {
         });
         if (response.status === 200) {
           toast.success("Successfully order cleaning service!");
-          router.refresh();
         } else {
           toast.error("Failed to order");
         }
@@ -99,8 +98,8 @@ export default function CleaningRequest({ id }: UserProfileProps) {
                   onChange={(e) => setSessionSelected(e.target.value)}
                   className="ml-2 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
                 >
-                  <option value={"morning"}>Morning</option>
-                  <option value={"afternoon"}>Afternoon</option>
+                  <option value={"Morning"}>Morning</option>
+                  <option value={"Afternoon"}>Afternoon</option>
                 </select>
               </div>
             </div>
@@ -134,7 +133,10 @@ export default function CleaningRequest({ id }: UserProfileProps) {
             {/* Order Button */}
             <button
               type="button"
-              onClick={() => handleSubmit(sessionSelected, catatan)}
+              onClick={() => {
+                handleSubmit(sessionSelected, catatan);
+                router.refresh();
+              }}
               className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-xl text-center font-bold rounded-lg shadow-sm text-white bg-[#11406A] w-full hover:shadow-[0_4px_4px_0px_rgba(0,0,0,0.25)]"
             >
               Order

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from "react";
 // Define the type for your order data
 
@@ -19,9 +19,7 @@ const CurrentOrder: React.FC = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await fetch(
-          "/api/order-user"
-        );
+        const response = await fetch("/api/order-user");
         const res2 = await response.json();
         setOrders(res2);
       } catch (error) {
@@ -50,40 +48,40 @@ const CurrentOrder: React.FC = () => {
       <div className="font-bold text-xl text-white mt-8 ml-4">
         Current Order
       </div>
-      
+
       <div className="bg-white rounded-lg shadow p-6 m-4">
         {orders.map((order, index) => {
           return (
-          <div
-            key={order.id}
-            className={`flex items-center border-b-2 border-black ${
-              index < orders.length - 1 ? "mb-4" : ""
-            }`}
-          >
             <div
-              className={`h-3 w-3 rounded-full ${statusBgColor(
-                order.status
-              )} mr-4`}
-            ></div>
-            <div className="flex-grow">
-              <div className="font-medium">
-                Room No. {order.nomorKamar} -{" "}
-                {order.session == 1 ? "Morning" : "Afternoon"}
-              </div>
-              <div className="text-gray-600">
-                {new Date(order.timestamp).toLocaleDateString()}
-              </div>
-            </div>
-            <div
-              className={`rounded text-white px-2 py-1 text-xs ${statusBgColor(
-                order.status
-              )}`}
+              key={order.id}
+              className={`flex items-center border-b-2 border-black ${
+                index < orders.length - 1 ? "mb-4" : ""
+              }`}
             >
-              {order.status.toString().charAt(0).toUpperCase() +
-                order.status.toString().slice(1)}
+              <div
+                className={`h-3 w-3 rounded-full ${statusBgColor(
+                  order.status
+                )} mr-4`}
+              ></div>
+              <div className="flex-grow">
+                <div className="font-medium">
+                  Room No. {order.nomorKamar} - {order.session}
+                </div>
+                <div className="text-gray-600">
+                  {new Date(order.timestamp).toLocaleDateString()}
+                </div>
+              </div>
+              <div
+                className={`rounded text-white px-2 py-1 text-xs ${statusBgColor(
+                  order.status
+                )}`}
+              >
+                {order.status.toString().charAt(0).toUpperCase() +
+                  order.status.toString().slice(1)}
+              </div>
             </div>
-          </div>
-        )})}
+          );
+        })}
       </div>
     </div>
   );

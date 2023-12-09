@@ -7,6 +7,7 @@ const nav = () => {
   const router = useRouter(); // Add useRouter() hook
   const handleSignOut = async () => {
     await signOut();
+    router.push("/login"); // Push to login page
   };
 
   return (

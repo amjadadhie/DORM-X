@@ -7,6 +7,7 @@ const nav = () => {
   const router = useRouter();
   const handleSignOut = async () => {
     await signOut();
+    router.push("/login");
   };
 
   return (
@@ -66,7 +67,6 @@ const nav = () => {
                 <button
                   onClick={() => {
                     handleSignOut();
-                    router.push("/login");
                   }}
                   className="block py-2 px-3 bg-[#FC97A3] rounded-lg shadow-lg"
                 >

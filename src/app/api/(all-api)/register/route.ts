@@ -5,8 +5,8 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 
 export async function POST(req: NextRequest) {
-  const { username, password, nama } = await req.json();
-  
+  const { username, password, nama, nomorKamar } = await req.json();
+
   const hashedPassword = await hash(password, 12);
 
   const userCount = await prisma.user.count();
@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
       password: hashedPassword,
       role: "PENGHUNI",
       nama: nama,
-      nomorKamar: "",
+      nomorKamar: nomorKamar,
       tagihan: 0,
     },
   });
