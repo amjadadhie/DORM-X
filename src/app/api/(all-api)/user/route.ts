@@ -20,7 +20,7 @@ export async function PATCH(req: any) {
 
   const updatedPenghuni = await prisma.user.update({
     where: {
-      userID: id
+      id
     },
     data: {
         password : password

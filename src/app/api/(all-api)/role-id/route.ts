@@ -22,7 +22,7 @@ export async function GET() {
 
   const roleByID = await prisma.user.findMany({
     where: {
-      userID: id
+      id
       // role: "PENGHUNI"
     },
     select: {

@@ -13,7 +13,7 @@ import { UserSession } from "@/components/userFetcher";
 async function page() {
   const session = await getServerSession(authOptions);
   const user = session?.user as UserSession;
-  const id = user.userID;
+  const id = user?.id;
   console.log(id);
 
   return (

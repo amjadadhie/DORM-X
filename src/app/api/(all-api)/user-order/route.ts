@@ -16,11 +16,11 @@ export async function GET() {
       );
     }
   
-    const user = session?.user.userID;
+    const user = session?.user?.id;
 
     const kamar = await prisma.user.findUnique({
       where: {
-        userID: user,
+        id: user,
       },
       })
 

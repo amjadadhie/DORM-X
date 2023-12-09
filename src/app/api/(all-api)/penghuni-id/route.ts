@@ -22,11 +22,11 @@ export async function GET() {
 
   const penghuniByID = await prisma.user.findMany({
     where: {
-      userID: id
+      id
       // role: "PENGHUNI"
     },
     select: {
-      userID: true,
+      id: true,
       nama: true,
       nomorKamar: true,
       tagihan: true,
