@@ -17,8 +17,6 @@ export async function PATCH(req: any){
         );
     }
 
-    const id = session?.user?.id;
-
     const { orderID, newStatus, newPetugas } = await req.json();
 
     const updatedOrder = await prisma.orderRequest.findUnique({

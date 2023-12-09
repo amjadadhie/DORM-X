@@ -7,7 +7,9 @@ import { UserSession } from "@/components/userFetcher";
 
 export async function GET() {
     const session = await getServerSession(authOptions);
-    
+    const user = session?.user as UserSession;
+    const nomorKamar = user.nomorKamar;
+  
     if (!session?.user) {
       return NextResponse.json(
         {
@@ -17,7 +19,11 @@ export async function GET() {
       );
     }
     
-    const orderRequest = await prisma.orderRequest.findMany({});
+    const orderRequest = await prisma.orderRequest.findMany({
+      where: {
+        nomorKamar: nomorKamar
+      }
+    });
   
     return NextResponse.json(orderRequest);
   }

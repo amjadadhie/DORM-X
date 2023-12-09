@@ -20,7 +20,7 @@ const CurrentOrder: React.FC = () => {
     const fetchOrders = async () => {
       try {
         const response = await fetch(
-          "/api/all-order"
+          "/api/order-user"
         );
         const res2 = await response.json();
         setOrders(res2);
@@ -34,11 +34,11 @@ const CurrentOrder: React.FC = () => {
   // Function to determine the background color based on the order status  // Function to determine the background color based on the order status
   const statusBgColor = (status: string): string => {
     switch (status) {
-      case "in progress":
+      case "In Progress":
         return "bg-[#FDD57C]";
-      case "requested":
+      case "Requested":
         return "bg-[#FC97A3]";
-      case "done":
+      case "Done":
         return "bg-[#66B19B]";
       default:
         return "bg-[#4D82B6]";
