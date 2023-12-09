@@ -7,6 +7,28 @@ function TableAdmin({ header }: { header: any[] }) {
   const [status, setStatus] = useState("");
   const [petugas, setPetugas] = useState("");
   const [orderID, setOrderID] = useState();
+  const [orderData, setOrderData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch("/api/all-order");
+        const res2 = await res.json();
+        setOrderData(res2);
+      } catch (error) {
+        console.error("Error fetching orders:", error);
+      }
+    };
+    
+    fetchData();
+  }, []);
+  
+  useEffect(() => {
+    console.log(orderData); // This will log the updated orderData when it changes
+  }, [orderData]); // Only re-run this effect if orderData changes
+  
+
+
 
   const handleSubmit = async() => {
     try{
