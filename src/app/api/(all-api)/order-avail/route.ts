@@ -6,6 +6,7 @@ import { getServerSession } from "next-auth";
 
 //mendapatkan data penghuni berdasarkan idx
 export async function GET(req: any) {
+    const sesi = req.json();
     const session = await getServerSession(authOptions);
 
     // route protection
@@ -21,7 +22,7 @@ export async function GET(req: any) {
 
     const orders = await prisma.orderRequest.findMany({
         where: {
-            session: req
+            session: sesi
         }
     });
 

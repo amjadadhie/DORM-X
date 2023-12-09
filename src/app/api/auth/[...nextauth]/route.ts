@@ -27,7 +27,6 @@ export const authOptions: NextAuthOptions = {
         if (!password) {
           throw new Error("Password tidak boleh kosong");
         }
-        
 
         const user = await prisma.user.findUnique({
           where: {
@@ -85,6 +84,7 @@ export const authOptions: NextAuthOptions = {
           userID: true,
           username: true,
           password: true,
+          role: true,
           nama: true,
           nomorKamar: true,
           tagihan: true,
