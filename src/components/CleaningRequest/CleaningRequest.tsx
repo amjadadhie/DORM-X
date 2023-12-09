@@ -34,6 +34,7 @@ export default async function CleaningRequest(id : any) {
               "Content-Type": "application/json",
             },
           });
+          console.log(sessionSelected)
           if (response.status === 200) {
             toast.success("Successfully order cleaning service!");
           } else {

@@ -31,7 +31,7 @@ async function page() {
       </div>
       <div className="flex flex-row">
         <div className="w-[49%]">
-          <UserProfile />
+          <UserProfile id/>
         </div>
         <div className="w-[1%] bg-[#4D82B6] rounded-xl my-2"></div>
         <div className="w-[50%]">

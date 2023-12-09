@@ -5,7 +5,7 @@ import { getServerSession } from "next-auth";
 
 
 //mendapatkan data penghuni berdasarkan idx
-export async function GET(req: any) {
+export async function GET() {
     const session = await getServerSession(authOptions);
 
     // route protection
@@ -18,14 +18,18 @@ export async function GET(req: any) {
         );
     }
     // end of route protection
+    const id = session?.user?.id;
 
     const penghuniByID = await prisma.user.findUnique({
         where: {
-            userID: req,
+            userID: id,
             role: "PENGHUNI"
         },
         select:{
-            nomorKamar: true
+            userID: true,
+            nama: true,
+            nomorKamar: true,
+            tagihan: true,
         }
     });
 
