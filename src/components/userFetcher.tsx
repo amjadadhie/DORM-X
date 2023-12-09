@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth/next";
 
 export interface UserSession {
   password(hashedOldPassword: string, password: any): unknown;
-  ID: Number;
+  userID: Number;
   username: string;
   role: string;
   nama: string;

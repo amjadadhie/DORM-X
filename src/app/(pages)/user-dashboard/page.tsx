@@ -13,7 +13,7 @@ import { UserSession } from "@/components/userFetcher";
 async function page() {
   const session = await getServerSession(authOptions);
   const user = session?.user as UserSession;
-  const id = user?.ID;
+  const id = user.userID;
   console.log(id);
 
   return (
@@ -31,7 +31,7 @@ async function page() {
       </div>
       <div className="flex flex-row">
         <div className="w-[49%]">
-          <UserProfile id />
+          <UserProfile/>
         </div>
         <div className="w-[1%] bg-[#4D82B6] rounded-xl my-2"></div>
         <div className="w-[50%]">
