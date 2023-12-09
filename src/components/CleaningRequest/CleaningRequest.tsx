@@ -9,19 +9,22 @@ import toast from "react-hot-toast";
 export default function CleaningRequest(id: Number) {
   const [sessionSelected, setSessionSelected] = useState<string>("");
   const [catatan, setCatatan] = useState("");
-  const [available, setAvailable] = useState<boolean>(true);
+  const [available, setAvailable] = useState<boolean>(false);
   const [userRoomNumber, setUserRoomNumber] = useState("");
   console.log(id);
 
   useEffect(() => {
     const fetchAvailOrder = async () => {
       try {
-        const res = await fetch(`/api/order-avail?session=${sessionSelected}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        // const res = await fetch("/api/order-avail", {
+        //   method: "GET",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        // });
+        // const res2 = await res.json();
+        // setAvailable(res2);
+        const res = await fetch("/api/order-avail");
         const res2 = await res.json();
         setAvailable(res2);
       } catch (error) {
