@@ -156,11 +156,24 @@ Dorm-X](https://docs.google.com/document/d/1sq9uMqK55Hkd6agdI6DfNBiQo11Ck_CJLN6f
 
 Dokumentasi Presentasi : [PPT LaSTI Service Engineering Dorm-X](https://www.canva.com/design/DAFzAODnm9c/L_U1JtvB-ol_XQNgtKYbkw/edit?utm_content=DAFzAODnm9c&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton) 
 
-## Authors
+Dokumentasi Design UI/UX Website : 
+[Figma Design UI UX](https://www.figma.com/file/snVusUolRkjyejYRFMtsxL/Dorm-X?type=design&node-id=0%3A1&mode=design&t=kupvJiFIp2zTcj1y-1)
+## Contributing
+
+Berikut ini adalah pembagian tugas masing masing untuk tugas besar ini : 
 
 - Marvel Subekti : 18221058
+` Frontend Engineer, Documentation, Final Report and Presentation `
+
 - Auvarifqi Putra Diandra : 18221060
+` Backend Engineer, Final Report and Presentation `
+
 - Raka Admiharfan Fatihah : 18221094
+` Frontend Engineer, Backend Engineer, Final Report and Presentation `
+
 - Christina Wijaya : 18221106
+`UI/UX Designer,Documentation, Final Report and Presentation `
+
 - Amjad Adhie Prasetyo : 18221170
+` Frontend Engineer, Backend Engineer, Final Report and Presentation `
 
