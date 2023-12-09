@@ -14,7 +14,7 @@ interface UserProfileProps {
 export default function CleaningRequest({ id }: UserProfileProps) {
   const [sessionSelected, setSessionSelected] = useState<string>("");
   const [catatan, setCatatan] = useState("");
-  const [available, setAvailable] = useState<boolean>(false);
+  const [available, setAvailable] = useState<boolean>(true);
   const [user, setUser] = useState<any>({});
   const router = useRouter();
 
