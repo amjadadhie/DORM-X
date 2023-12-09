@@ -3,11 +3,12 @@ import { getServerSession } from "next-auth/next";
 
 export interface UserSession {
   password(hashedOldPassword: string, password: any): unknown;
-    ID: Number,
-    username: string,
-    nama: string,
-    nomorKamar: string,
-    tagihan: Number,
+  ID: Number;
+  username: string;
+  role: string;
+  nama: string;
+  nomorKamar: string;
+  tagihan: Number;
 }
 
 interface UserFetcherProps {

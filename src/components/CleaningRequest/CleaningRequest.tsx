@@ -6,7 +6,11 @@ import Image from "next/image"; // If you're using Next.js Image component
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-export default function CleaningRequest(id: Number) {
+interface UserProfileProps {
+  id: Number;
+}
+
+export default function CleaningRequest({ id }: UserProfileProps) {
   const [sessionSelected, setSessionSelected] = useState<string>("");
   const [catatan, setCatatan] = useState("");
   const [available, setAvailable] = useState<boolean>(false);
