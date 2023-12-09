@@ -8,7 +8,7 @@ import { UserSession } from "@/components/userFetcher";
 export async function GET() {
     const session = await getServerSession(authOptions);
     const user = session?.user as UserSession;
-    const nomorKamar = user.nomorKamar;
+    const nomorKamar = user?.nomorKamar;
   
     if (!session?.user) {
       return NextResponse.json(
