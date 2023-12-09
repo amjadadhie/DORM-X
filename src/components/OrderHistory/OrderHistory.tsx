@@ -72,7 +72,7 @@ const CurrentOrder: React.FC = () => {
                 </div>
               </div>
               <div
-                className={`rounded text-white px-2 py-1 text-xs ${statusBgColor(
+                className={`rounded text-black px-2 py-1 text-xs ${statusBgColor(
                   order.status
                 )}`}
               >
