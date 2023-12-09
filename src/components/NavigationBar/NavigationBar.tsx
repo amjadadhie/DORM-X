@@ -1,7 +1,15 @@
 "use client";
 import React from "react";
+import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const nav = () => {
+  const handleSignOut = async () => {
+    await signOut();
+  };
+
+  const router = useRouter();
+
   return (
     <div>
       <nav className="bg-[#4D82B6]  fixed w-full z-20 top-0 start-0 border-b ">
@@ -55,7 +63,13 @@ const nav = () => {
                 </a>
               </li>
               <li>
-                <button className="block py-2 px-3 bg-[#FC97A3] rounded-lg hover:shadow-[0_4px_4px_0px_rgba(0,0,0,0.25)]">
+                <button
+                  onClick={() => {
+                    handleSignOut();
+                    router.push("/");
+                  }}
+                  className="block py-2 px-3 bg-[#FC97A3] rounded-lg hover:shadow-[0_4px_4px_0px_rgba(0,0,0,0.25)]"
+                >
                   Logout
                 </button>
               </li>

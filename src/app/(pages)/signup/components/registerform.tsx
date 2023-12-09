@@ -26,6 +26,7 @@ export default function RegisterForm() {
       });
       if (res.status === 200) {
         toast.success("Successfully Register!");
+        router.push("/login");
       } else {
         toast.error("Failed to Register");
       }

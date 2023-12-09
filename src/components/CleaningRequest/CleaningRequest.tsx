@@ -5,6 +5,7 @@ import { CgNotes } from "react-icons/cg";
 import Image from "next/image"; // If you're using Next.js Image component
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 interface UserProfileProps {
   id: Number;
@@ -14,16 +15,17 @@ export default function CleaningRequest({ id }: UserProfileProps) {
   const [sessionSelected, setSessionSelected] = useState<string>("");
   const [catatan, setCatatan] = useState("");
   const [available, setAvailable] = useState<boolean>(false);
-  const [user, setUser] = useState<any>({})
+  const [user, setUser] = useState<any>({});
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch("/api/userid")
-      const data = await res.json()
-      setUser(data)
-    }
-    fetchData()    
-  }, [])
+      const res = await fetch("/api/userid");
+      const data = await res.json();
+      setUser(data);
+    };
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const fetchAvailOrder = async () => {
@@ -57,6 +59,7 @@ export default function CleaningRequest({ id }: UserProfileProps) {
         console.log(sessionSelected);
         if (response.status === 200) {
           toast.success("Successfully order cleaning service!");
+          router.refresh();
         } else {
           toast.error("Failed to order");
         }
@@ -132,7 +135,7 @@ export default function CleaningRequest({ id }: UserProfileProps) {
             {/* Order Button */}
             <button
               type="button"
-              onClick={ () => handleSubmit(sessionSelected, catatan)}
+              onClick={() => handleSubmit(sessionSelected, catatan)}
               className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-xl text-center font-bold rounded-lg shadow-sm text-white bg-[#11406A] w-full hover:shadow-[0_4px_4px_0px_rgba(0,0,0,0.25)]"
             >
               Order
