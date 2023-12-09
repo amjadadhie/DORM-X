@@ -26,19 +26,16 @@ function TableAdmin({ header }: { header: any[] }) {
   useEffect(() => {
     console.log(orderData); // This will log the updated orderData when it changes
   }, [orderData]); // Only re-run this effect if orderData changes
-  
 
-
-
-  const handleSubmit = async() => {
+  const handleSubmit = async(req1 : any, req2: any, req3: any) => {
     try{
       const res = await fetch("/api/change-status",
       {
         method: "PATCH",
         body: JSON.stringify({
-          orderID: orderID,
-          newStatus : status,
-          newPetugas : petugas,
+          orderID: req1,
+          newStatus : req2,
+          newPetugas : req3,
         }),
         headers: {
           "Content-Type": "application/json",
