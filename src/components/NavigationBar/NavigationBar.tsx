@@ -1,14 +1,13 @@
 "use client";
 import React from "react";
 import { signOut } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation"; // Import useRouter from "next/router"
 
 const nav = () => {
+  const router = useRouter(); // Add useRouter() hook
   const handleSignOut = async () => {
     await signOut();
   };
-
-  const router = useRouter();
 
   return (
     <div>
@@ -66,7 +65,7 @@ const nav = () => {
                 <button
                   onClick={() => {
                     handleSignOut();
-                    router.push("/");
+                    router.push("/login"); // Push to login page
                   }}
                   className="block py-2 px-3 bg-[#FC97A3] rounded-lg hover:shadow-[0_4px_4px_0px_rgba(0,0,0,0.25)]"
                 >

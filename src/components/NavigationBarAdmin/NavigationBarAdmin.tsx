@@ -4,11 +4,10 @@ import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 const nav = () => {
+  const router = useRouter();
   const handleSignOut = async () => {
     await signOut();
   };
-
-  const router = useRouter();
 
   return (
     <div>
@@ -67,7 +66,7 @@ const nav = () => {
                 <button
                   onClick={() => {
                     handleSignOut();
-                    router.push("/");
+                    router.push("/login");
                   }}
                   className="block py-2 px-3 bg-[#FC97A3] rounded-lg shadow-lg"
                 >

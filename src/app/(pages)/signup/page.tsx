@@ -1,9 +1,6 @@
-import Image from "next/image";
 import RegisterForm from "./components/registerform";
 import Link from "next/link";
-import React, { useEffect } from "react";
-
-import house from "@/../public/images/rumahlogin.svg";
+import React from "react";
 
 export default function SignUp() {
   return (
