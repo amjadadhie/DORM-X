@@ -3,7 +3,7 @@ import React from "react";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-const nav = () => {
+const Nav = () => {
   const router = useRouter();
   const handleSignOut = async () => {
     await signOut();
@@ -81,4 +81,4 @@ const nav = () => {
   );
 };
 
-export default nav;
+export default Nav;
