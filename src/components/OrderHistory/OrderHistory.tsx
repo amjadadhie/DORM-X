@@ -28,7 +28,6 @@ const CurrentOrder: React.FC = () => {
         console.error("Error fetching orders:", error);
       }
     };
-
     fetchOrders();
   }, []);
 
@@ -51,8 +50,9 @@ const CurrentOrder: React.FC = () => {
       <div className="font-bold text-xl text-white mt-8 ml-4">
         Current Order
       </div>
+      
       <div className="bg-white rounded-lg shadow p-6 m-4">
-        {/* {orders.map((order, index) => {
+        {orders.map((order, index) => {
           return (
           <div
             key={order.id}
@@ -62,13 +62,13 @@ const CurrentOrder: React.FC = () => {
           >
             <div
               className={`h-3 w-3 rounded-full ${statusBgColor(
-                order.status.toString()
+                order.status
               )} mr-4`}
             ></div>
             <div className="flex-grow">
               <div className="font-medium">
                 Room No. {order.nomorKamar} -{" "}
-                {order.session === 60980 ? "Morning" : "Afternoon"}
+                {order.session == 1 ? "Morning" : "Afternoon"}
               </div>
               <div className="text-gray-600">
                 {new Date(order.timestamp).toLocaleDateString()}
@@ -76,14 +76,14 @@ const CurrentOrder: React.FC = () => {
             </div>
             <div
               className={`rounded text-white px-2 py-1 text-xs ${statusBgColor(
-                order.status.toString()
+                order.status
               )}`}
             >
               {order.status.toString().charAt(0).toUpperCase() +
                 order.status.toString().slice(1)}
             </div>
           </div>
-        )})} */}
+        )})}
       </div>
     </div>
   );

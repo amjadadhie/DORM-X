@@ -18,7 +18,6 @@ export default function LoginForm({ roleAccess }: LoginFormProps) {
   const handleLogin = async (e: React.FormEvent) => {
     try {
       e.preventDefault();
-      console.log("kepencet gak sih");
       // Perform login authentication logic here
       const res = await signIn("credentials", {
         redirect: false,
@@ -26,15 +25,11 @@ export default function LoginForm({ roleAccess }: LoginFormProps) {
         password: loginPassword,
         callbackUrl: "/",
       });
-      console.log(res);
-      console.log("Masuk sini");
       // print error if error
       if (res?.error) {
-        console.log("error");
         toast.error("Invalid credentials");
       } else {
         toast.success("Login success");
-        console.log(res);
         router.refresh();
       }
     } catch (error) {

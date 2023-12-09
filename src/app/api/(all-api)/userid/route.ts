@@ -17,7 +17,7 @@ export async function GET() {
       { status: 401 }
     );
   }
-  const id = session?.user.ID;
+  const user = session?.user;
 
-  return NextResponse.json(id);
+  return NextResponse.json(user);
 }

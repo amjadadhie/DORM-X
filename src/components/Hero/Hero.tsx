@@ -1,12 +1,21 @@
 "use client"
 import React from "react";
+import { useState, useEffect } from "react";
 // import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 // import { getServerSession } from "next-auth";
 // import { UserSession } from "../userFetcher";
 
-export default async function Hero() {
-  // const session = await getServerSession(authOptions);
-  // const user = session?.user as UserSession
+export default function Hero() {
+  const [user, setUser] = useState<any>({})
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch("/api/userid")
+      const data = await res.json()
+      setUser(data)
+    }
+    fetchData()    
+  }, [])
 
   return (
     <div
@@ -18,7 +27,7 @@ export default async function Hero() {
         height: "450px", // adjust the height as you need
       }}
     >
-      <h1 className="text-4xl font-bold text-[#11406A] ml-4">Hi, Lisa!</h1>
+      <h1 className="text-4xl font-bold text-[#11406A] ml-4">Hi, {user.nama} !</h1>
       <p className="text-2xl text-[#11406A] ml-4">
         Need help to clean your room?
       </p>

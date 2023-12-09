@@ -14,7 +14,6 @@ async function page() {
   const session = await getServerSession(authOptions);
   const user = session?.user as UserSession;
   const id = user?.id;
-  console.log(id);
 
   return (
     <div>

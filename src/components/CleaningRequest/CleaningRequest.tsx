@@ -14,20 +14,20 @@ export default function CleaningRequest({ id }: UserProfileProps) {
   const [sessionSelected, setSessionSelected] = useState<string>("");
   const [catatan, setCatatan] = useState("");
   const [available, setAvailable] = useState<boolean>(false);
-  const [userRoomNumber, setUserRoomNumber] = useState("");
-  console.log(id);
+  const [user, setUser] = useState<any>({})
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch("/api/userid")
+      const data = await res.json()
+      setUser(data)
+    }
+    fetchData()    
+  }, [])
 
   useEffect(() => {
     const fetchAvailOrder = async () => {
       try {
-        // const res = await fetch("/api/order-avail", {
-        //   method: "GET",
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //   },
-        // });
-        // const res2 = await res.json();
-        // setAvailable(res2);
         const res = await fetch("/api/order-avail");
         const res2 = await res.json();
         setAvailable(res2);
@@ -41,19 +41,14 @@ export default function CleaningRequest({ id }: UserProfileProps) {
     }
   }, [sessionSelected]);
 
-  console.log(sessionSelected);
-  console.log(available);
-
-  const handleSubmit = async () => {
-    console.log(sessionSelected);
-    console.log(available);
+  const handleSubmit = async (req1: any, req2: any) => {
     if (available) {
       try {
         const response = await fetch("/api/order-request", {
           method: "POST",
           body: JSON.stringify({
-            SessionId: sessionSelected,
-            notes: catatan,
+            SessionId: req1,
+            notes: req2,
           }),
           headers: {
             "Content-Type": "application/json",
@@ -72,19 +67,6 @@ export default function CleaningRequest({ id }: UserProfileProps) {
       toast.error("You already order cleaning service!");
     }
   };
-  // useEffect(() => {
-  //   const fetchRoomNumber = async () => {
-  //     const session = await getSession(); // Mendapatkan informasi sesi pengguna
-
-  //     if (session && session.user && session.user.nomorKamar) {
-  //       setUserRoomNumber(session.user.nomorKamar);
-  //       // Lakukan sesuatu dengan nomor kamar dari pengguna yang sedang login
-  //       console.log('Nomor kamar pengguna:', userRoomNumber);
-  //     }
-  //   };
-
-  //   fetchRoomNumber();
-  // }, []);
 
   return (
     <div>
@@ -101,7 +83,7 @@ export default function CleaningRequest({ id }: UserProfileProps) {
               <div className="flex items-center gap-x-2 ">
                 <MdMeetingRoom className="text-[#4D82B6]" size={18} />
                 <span className="p-2  w-full border-b border-[#11406A]">
-                  Room No.
+                  Room No. {user.nomorKamar}
                 </span>
               </div>
 
@@ -150,7 +132,7 @@ export default function CleaningRequest({ id }: UserProfileProps) {
             {/* Order Button */}
             <button
               type="button"
-              onClick={handleSubmit}
+              onClick={ () => handleSubmit(sessionSelected, catatan)}
               className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-xl text-center font-bold rounded-lg shadow-sm text-white bg-[#11406A] w-full hover:shadow-[0_4px_4px_0px_rgba(0,0,0,0.25)]"
             >
               Order
