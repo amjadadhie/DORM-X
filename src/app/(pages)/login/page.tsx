@@ -147,7 +147,7 @@ const LoginPage: React.FC<SignUpContainerProps> = ({ $signinIn }) => {
           <Components.LeftOverlayPanel $signinIn={issignIn}>
             <Components.Title>Wohoo!</Components.Title>
             <Components.SemiTitle>
-              lets clean up you clothes
+              lets clean up your room
             </Components.SemiTitle>
             <Components.Paragraph>
               if you already have an account<br></br>
@@ -161,7 +161,7 @@ const LoginPage: React.FC<SignUpContainerProps> = ({ $signinIn }) => {
           <Components.RightOverlayPanel $signinIn={issignIn}>
             <Components.Title>One step closer</Components.Title>
             <Components.SemiTitle>
-              to get your clothes done!
+              to get your Room done!
             </Components.SemiTitle>
             <Components.Paragraph>
               if you dont have an account<br></br>

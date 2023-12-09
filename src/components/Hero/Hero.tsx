@@ -18,7 +18,7 @@ export default async function Hero() {
         height: "450px", // adjust the height as you need
       }}
     >
-      <h1 className="text-4xl font-bold text-[#11406A] ml-4">Hi, nama!</h1>
+      <h1 className="text-4xl font-bold text-[#11406A] ml-4">Hi, Lisa!</h1>
       <p className="text-2xl text-[#11406A] ml-4">
         Need help to clean your room?
       </p>
