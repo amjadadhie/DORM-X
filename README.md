@@ -24,7 +24,7 @@ Secara garis besar, layanan ini memiliki proses bisnis sebagai berikut :
 Berikut ini adalah DOKUMEN Tutorial untuk penggunaan Layanan WEBSITE DORM - X
 
 
-[TUTORIAL PENGGUNAAN LAYANANA DORM-X](https://docs.google.com/document/d/1VUY7j_HhYt-MaAJ6WMq1V4lby5zaYKN5eZntsiRX4yE/edit?usp=sharing)
+[TUTORIAL PENGGUNAAN LAYANAN DORM-X](https://docs.google.com/document/d/1VUY7j_HhYt-MaAJ6WMq1V4lby5zaYKN5eZntsiRX4yE/edit?usp=sharing)
 
 
 ## Deployment
@@ -52,7 +52,7 @@ Berikut ini adalah environment Variables yang kami miliki untuk mengakses databa
 
 `DATABASE URL="postgresql://postgres:lastimantap2023@db.pgcpmyruzimwvrfxjukr.supabase.co:5432/postgres"`
 
-## Color Pallete
+## Color Palette
 
 | Color             | Hex                                                                |
 | ----------------- | ------------------------------------------------------------------ |
